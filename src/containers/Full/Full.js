@@ -35,7 +35,7 @@ class Full extends Component {
   constructor(props) {
     super(props);
     //Change this to be an object to iterate.
-    console.log("In Full.js ->",props.local_data.greeting);
+    //console.log("In Full.js ->",props.local_data.greeting);
     this.state = {};
   }
 
