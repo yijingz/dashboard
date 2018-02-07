@@ -25,16 +25,9 @@ import FontAwesome from '../../views/Icons/FontAwesome/';
 import SimpleLineIcons from '../../views/Icons/SimpleLineIcons/';
 import * as firebase from 'firebase';
 
-var config = {
-    apiKey: "AIzaSyBPweAHcP4em0PYh8XWzEqjNhTk3OBNS5I",
-    authDomain: "dashboard-dev-8b843.firebaseapp.com",
-    databaseURL: "https://dashboard-dev-8b843.firebaseio.com",
-    projectId: "dashboard-dev-8b843",
-    storageBucket: "dashboard-dev-8b843.appspot.com",
-    messagingSenderId: "264557605189"
-  };
-firebase.initializeApp(config);
-
+import {compose} from 'redux'
+import {connect} from 'react-redux'
+import { firebaseConnect, isLoaded } from 'react-redux-firebase'
 
 
 
@@ -46,15 +39,15 @@ class Full extends Component {
     this.state = {};
   }
 
-  componentWillMount(){
-    /* Create reference to messages in Firebase Database */
-    let db = firebase.database().ref('/');    
-    db.on('value', snapshot => {
-      /* Update React state when message is added at Firebase Database */
-      let locData = snapshot.val();
-      this.setState(locData);
-    })
-  }
+  // componentWillMount(){
+  //   /* Create reference to messages in Firebase Database */
+  //   let db = firebase.database().ref('/');    
+  //   db.on('value', snapshot => {
+  //     /* Update React state when message is added at Firebase Database */
+  //     let locData = snapshot.val();
+  //     this.setState(locData);
+  //   })
+  // }
 
   // setState(props){
     
@@ -101,4 +94,10 @@ class Full extends Component {
   }
 }
 
-export default Full;
+const FullWithFirebase = compose(
+  firebaseConnect(),
+  connect(({ firebase }) => ({ auth: firebase.auth}))
+)(Full)
+
+
+export default FullWithFirebase;
