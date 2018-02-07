@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {HashRouter, Route, Switch} from 'react-router-dom';
 import firebase from 'firebase';
 import { Provider} from 'react-redux';
+import store from './store'
 // Styles
 // Import Font Awesome Icons Set
 import 'font-awesome/css/font-awesome.min.css';
@@ -22,15 +23,7 @@ import '../scss/core/_dropdown-menu-right.scss'
 // Initialize Firebase
 // TODO: Replace with your project's customized code snippet
  
-var fbconfig = {
-    apiKey: "AIzaSyBPweAHcP4em0PYh8XWzEqjNhTk3OBNS5I",
-    authDomain: "dashboard-dev-8b843.firebaseapp.com",
-    databaseURL: "https://dashboard-dev-8b843.firebaseio.com",
-    projectId: "dashboard-dev-8b843",
-    storageBucket: "dashboard-dev-8b843.appspot.com",
-    messagingSenderId: "264557605189"
-  };
-firebase.initializeApp(fbconfig);
+
 
   
 var local_data = {}

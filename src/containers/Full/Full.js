@@ -94,10 +94,7 @@ class Full extends Component {
   }
 }
 
-const FullWithFirebase = compose(
-  firebaseConnect(),
-  connect(({ firebase }) => ({ auth: firebase.auth}))
-)(Full)
+const FullWithFirebase = firebaseConnect(['/'])(Full)
 
 
-export default FullWithFirebase;
+export default connect()(FullWithFirebase);
