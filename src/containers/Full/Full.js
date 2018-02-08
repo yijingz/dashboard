@@ -28,7 +28,7 @@ import * as firebase from 'firebase';
 import {compose} from 'redux'
 import {connect} from 'react-redux'
 import { firebaseConnect, isLoaded } from 'react-redux-firebase'
-
+import store from '../../store'
 
 
 class Full extends Component {
@@ -36,7 +36,8 @@ class Full extends Component {
     super(props);
     //Change this to be an object to iterate.
     //console.log("In Full.js ->",props.local_data.greeting);
-    this.state = {};
+    this.state = store.getState();
+    console.log(this.state);
   }
 
   // componentWillMount(){
@@ -94,7 +95,8 @@ class Full extends Component {
   }
 }
 
-const FullWithFirebase = firebaseConnect(['/'])(Full)
+const FullWithFirebase = firebaseConnect(['greeting'])(Full)
 
 
-export default connect()(FullWithFirebase);
+//export default connect()(FullWithFirebase);
+export default FullWithFirebase;

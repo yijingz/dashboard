@@ -15,7 +15,7 @@ var fbconfig = {
 firebase.initializeApp(fbconfig);
 
 const config = {
-	userProfile: 'users'
+//	userProfile: 'users'
 }
 
 const createStoreWithFirebase = compose(
@@ -25,5 +25,5 @@ const createStoreWithFirebase = compose(
 
 const store = createStoreWithFirebase(reducers, {})
 
-
+console.log('store created');
 export default store;
