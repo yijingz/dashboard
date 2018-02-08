@@ -36,9 +36,11 @@ class Full extends Component {
     super(props);
     //Change this to be an object to iterate.
     //console.log("In Full.js ->",props.local_data.greeting);
-    this.state = store.getState();
-    console.log(this.state);
+  //  this.state = store.getState();
+  //  console.log(this.state);
   }
+
+  
 
   // componentWillMount(){
   //   /* Create reference to messages in Firebase Database */
@@ -81,7 +83,7 @@ class Full extends Component {
                 <Route path="/icons/simple-line-icons" name="Simple Line Icons" component={SimpleLineIcons}/>
                 <Route path="/widgets" name="Widgets" component={Widgets}/>
                 <Route path="/charts_original" name="Charts" component={Charts} />
-                <Route path="/charts" name="Charts" render={props => <Charts local_data={this.state} {...props} />} />
+                <Route path="/charts" name="Charts" render={props => <Charts local_data={props.local_data} {...props} />} />
               
                 <Redirect from="/" to="/dashboard"/>
               </Switch>
@@ -95,8 +97,21 @@ class Full extends Component {
   }
 }
 
-const FullWithFirebase = firebaseConnect(['greeting'])(Full)
+
+const mapStateToProps = state => {
+  console.log('mapStateToProps')
+  console.log(state.val)
+  return {
+    local_data: state.val
+  }
+}
+
+const mapDispatchToProps = dispatch => {}
 
 
-//export default connect()(FullWithFirebase);
-export default FullWithFirebase;
+const FullConnected = connect(
+  mapStateToProps,
+)(Full)
+
+export default FullConnected;
+//export default Full;

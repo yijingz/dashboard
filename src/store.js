@@ -1,29 +1,20 @@
-import { createStore, compose } from 'redux';
-import { reactReduxFirebase } from 'react-redux-firebase';
-import * as firebase from 'firebase';
+import { createStore } from 'redux';
 
-import reducers from './reducers/';
-
-var fbconfig = {
-    apiKey: "AIzaSyBPweAHcP4em0PYh8XWzEqjNhTk3OBNS5I",
-    authDomain: "dashboard-dev-8b843.firebaseapp.com",
-    databaseURL: "https://dashboard-dev-8b843.firebaseio.com",
-    projectId: "dashboard-dev-8b843",
-    storageBucket: "dashboard-dev-8b843.appspot.com",
-    messagingSenderId: "264557605189"
-  };
-firebase.initializeApp(fbconfig);
-
-const config = {
-//	userProfile: 'users'
-}
-
-const createStoreWithFirebase = compose(
-  reactReduxFirebase(firebase, config),
-)(createStore)
+const reducer = (state = {}, action) => {
+  switch(action.type) {
+    case 'SET_VAL':
+      return {
+        ...state,
+        val: action.payload
+      };
+    
+    // Handle other actions here
+    default:
+      return state;
+  }
+};
 
 
-const store = createStoreWithFirebase(reducers, {})
-
-console.log('store created');
+const store = createStore(reducer);
+console.log('store created')
 export default store;
