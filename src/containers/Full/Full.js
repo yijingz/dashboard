@@ -38,6 +38,8 @@ class Full extends Component {
     //console.log("In Full.js ->",props.local_data.greeting);
   //  this.state = store.getState();
   //  console.log(this.state);
+  console.log('Props:')
+  console.log(props)
   }
 
   
@@ -61,6 +63,8 @@ class Full extends Component {
   // }
 
   render() {
+    console.log('props from within render:')
+    console.log(this.props)
     return (
       <div className="app">
         <Header />
@@ -83,7 +87,7 @@ class Full extends Component {
                 <Route path="/icons/simple-line-icons" name="Simple Line Icons" component={SimpleLineIcons}/>
                 <Route path="/widgets" name="Widgets" component={Widgets}/>
                 <Route path="/charts_original" name="Charts" component={Charts} />
-                <Route path="/charts" name="Charts" render={props => <Charts local_data={props.local_data} {...props} />} />
+                <Route path="/charts" name="Charts" render={props => <Charts local_data={this.props.local_data} {...props} />} />
               
                 <Redirect from="/" to="/dashboard"/>
               </Switch>
@@ -101,9 +105,8 @@ class Full extends Component {
 const mapStateToProps = state => {
   console.log('mapStateToProps')
   console.log(state.val)
-  return {
-    local_data: state.val
-  }
+  //var local_data = state.val;
+  return {local_data : state.val}
 }
 
 const mapDispatchToProps = dispatch => {}
