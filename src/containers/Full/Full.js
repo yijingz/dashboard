@@ -25,43 +25,31 @@ import FontAwesome from '../../views/Icons/FontAwesome/';
 import SimpleLineIcons from '../../views/Icons/SimpleLineIcons/';
 import * as firebase from 'firebase';
 
-// Initialize Firebase
-// TODO: Replace with your project's customized code snippet
 
-var config = {
-    apiKey: "AIzaSyBPweAHcP4em0PYh8XWzEqjNhTk3OBNS5I",
-    authDomain: "dashboard-dev-8b843.firebaseapp.com",
-    databaseURL: "https://dashboard-dev-8b843.firebaseio.com",
-    projectId: "dashboard-dev-8b843",
-    storageBucket: "dashboard-dev-8b843.appspot.com",
-    messagingSenderId: "264557605189"
-  };
-firebase.initializeApp(config);
+import {compose} from 'redux'
+import {connect} from 'react-redux'
+import { firebaseConnect, isLoaded } from 'react-redux-firebase'
+import store from '../../store'
 
 
 class Full extends Component {
   constructor(props) {
+    
     super(props);
-    this.state = {};
+
   }
 
-  componentWillMount(){
-    /* Create reference to messages in Firebase Database */
-    let db = firebase.database().ref('/');    
-    db.off();
-    db.on('value', snapshot => {
-      /* Update React state when message is added at Firebase Database */
-      
-      let locData = snapshot.val();
-      this.setState(locData);
-      console.log(locData);
-      this.forceUpdate();
-      //this.state = locData;
-    })
+  componentWillReceiveProps(newProps){
+     if(newProps != this.props){
+         this.setState(newProps)
+     }
   }
 
+
+ 
   render() {
     return (
+
       <div className="app">
         <Header />
         <div className="app-body">
@@ -84,9 +72,11 @@ class Full extends Component {
                 <Route path="/icons/font-awesome" name="Font Awesome" component={FontAwesome}/>
                 <Route path="/icons/simple-line-icons" name="Simple Line Icons" component={SimpleLineIcons}/>
                 <Route path="/widgets" name="Widgets" component={Widgets}/>
+                
                 <Route path="/charts_original" name="Charts" component={Charts} />
                 
-                
+
+                <Route path="/charts" name="Charts" render={props => <Charts local_data={this.state.local_data} {...props} />} />
                 <Redirect from="/" to="/dashboard"/>
             </Switch>
             </Container>
@@ -99,4 +89,16 @@ class Full extends Component {
   }
 }
 
-export default Full;
+
+const mapStateToProps = state => {
+  return {local_data : state.val}
+}
+
+const mapDispatchToProps = dispatch => {}
+
+
+const FullConnected = connect(
+  mapStateToProps,
+)(Full)
+
+export default FullConnected;

@@ -233,25 +233,12 @@ class Charts extends Component {
   constructor(props) {
     super(props);
     //Change this to be an object to iterate.
-    this.state = {isLoggedIn: false};
-    // var local_data = {};
-    // let db = firebase.database().ref('/');    
-    // db.off();
-    // db.on('value', snapshot => {
-    //   /* Update React state when message is added at Firebase Database */
-    //   console.log('inside mount from charts');
-    //   local_data = snapshot.val();
-    //   //this.setState(locData);
-    //   // props.local_data = locData;
-      
-      
-    //   //this.state = locData;
-    // })
     
-    console.log("In Charts.js ->",props.local_data.greeting);
+    //  console.log("In Charts.js ->",props.local_data.greeting)
     //Change this to be an object to iterate.
     //Then put data in locally rather than from variables. 
     //Then move to local_data and get from props. 
+
     this.inPageChartsArray = [{"title":"In Page Line Chart 1","chartType":"Line","data":line},
                  {"title":"In Page Line Chart 2","chartType":"Line","data":line},
                  {"title":"In Page Bar Chart 3", "chartType":"Bar","data":bar},
@@ -277,6 +264,20 @@ class Charts extends Component {
    
     
   }
+
+  componentWillReceiveProps(newProps){
+     if(newProps != this.props){
+         this.props = newProps
+         
+         this.setState(newProps)
+
+         this.localDataChartsArray = Object.keys(newProps.local_data.charts).map(function(key) {
+          var item = newProps.local_data.charts[key];
+          return item;
+          });           
+     }
+  }
+
   render() {
     return (
       <div className="animated fadeIn">
