@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Bar, Doughnut, Line, Pie, Polar, Radar} from 'react-chartjs-2';
 import {CardColumns, Card, CardHeader, CardBody} from 'reactstrap';
+import * as firebase from 'firebase';
 
 const myCharts = {
   line1 :{
@@ -232,9 +233,8 @@ class Charts extends Component {
   constructor(props) {
     super(props);
     //Change this to be an object to iterate.
-
-    //  console.log("In Charts.js ->",props.local_data.greeting);
     
+    //  console.log("In Charts.js ->",props.local_data.greeting)
     //Change this to be an object to iterate.
     //Then put data in locally rather than from variables. 
     //Then move to local_data and get from props. 

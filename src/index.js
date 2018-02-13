@@ -22,9 +22,6 @@ import '../scss/core/_dropdown-menu-right.scss'
 
 // Initialize Firebase
 // TODO: Replace with your project's customized code snippet
- 
-
-
   
 var local_data = {}
 
@@ -72,6 +69,7 @@ db.ref('/').on('value', data => {
 
 //store.subscribe(FullConnected);
 
+
 ReactDOM.render((
   
   <div>
@@ -84,6 +82,7 @@ ReactDOM.render((
       <Route exact path="/500" name="Page 500" component={Page500}/>
       <Route path="/original" name="Home" component={FullConnected}/>
       <Route path="/" name="Home" component = {FullConnected} />
+
     //  <Route path="/" name="Home" render={props => <Full local_data= {local_data} />} />
     </Switch>
   </Provider>

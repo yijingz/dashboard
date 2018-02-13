@@ -25,6 +25,7 @@ import FontAwesome from '../../views/Icons/FontAwesome/';
 import SimpleLineIcons from '../../views/Icons/SimpleLineIcons/';
 import * as firebase from 'firebase';
 
+
 import {compose} from 'redux'
 import {connect} from 'react-redux'
 import { firebaseConnect, isLoaded } from 'react-redux-firebase'
@@ -44,6 +45,8 @@ class Full extends Component {
      }
   }
 
+
+ 
   render() {
     return (
 
@@ -55,7 +58,9 @@ class Full extends Component {
             <Breadcrumb />
             <Container fluid>
               <Switch>
+                <Route path="/charts" name="Charts" children={props => <Charts local_data={this.state} {...props} />} />
                 <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
+                // <Route path="/dashboard" name="Dashboard" render={props => <Charts local_data={this.state} {...props} />} />
                 <Route path="/components/buttons" name="Buttons" component={Buttons}/>
                 <Route path="/components/cards" name="Cards" component={Cards}/>
                 <Route path="/components/forms" name="Forms" component={Forms}/>
@@ -70,10 +75,10 @@ class Full extends Component {
                 
                 <Route path="/charts_original" name="Charts" component={Charts} />
                 
+
                 <Route path="/charts" name="Charts" render={props => <Charts local_data={this.state.local_data} {...props} />} />
-              
                 <Redirect from="/" to="/dashboard"/>
-              </Switch>
+            </Switch>
             </Container>
           </main>
           <Aside />
