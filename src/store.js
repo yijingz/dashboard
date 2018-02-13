@@ -16,5 +16,5 @@ const reducer = (state = {}, action) => {
 
 
 const store = createStore(reducer);
-console.log('store created')
+//console.log('store created')
 export default store;

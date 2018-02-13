@@ -233,11 +233,12 @@ class Charts extends Component {
     super(props);
     //Change this to be an object to iterate.
 
-      console.log("In Charts.js ->",props.local_data.greeting);
+    //  console.log("In Charts.js ->",props.local_data.greeting);
     
     //Change this to be an object to iterate.
     //Then put data in locally rather than from variables. 
     //Then move to local_data and get from props. 
+
     this.inPageChartsArray = [{"title":"In Page Line Chart 1","chartType":"Line","data":line},
                  {"title":"In Page Line Chart 2","chartType":"Line","data":line},
                  {"title":"In Page Bar Chart 3", "chartType":"Bar","data":bar},
@@ -261,8 +262,22 @@ class Charts extends Component {
    });  
    */         
    
-    this.state = {isLoggedIn: false};
+    
   }
+
+  componentWillReceiveProps(newProps){
+     if(newProps != this.props){
+         this.props = newProps
+         
+         this.setState(newProps)
+
+         this.localDataChartsArray = Object.keys(newProps.local_data.charts).map(function(key) {
+          var item = newProps.local_data.charts[key];
+          return item;
+          });           
+     }
+  }
+
   render() {
     return (
       <div className="animated fadeIn">

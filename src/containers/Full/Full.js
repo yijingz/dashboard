@@ -33,39 +33,20 @@ import store from '../../store'
 
 class Full extends Component {
   constructor(props) {
+    
     super(props);
-    //Change this to be an object to iterate.
-    //console.log("In Full.js ->",props.local_data.greeting);
-  //  this.state = store.getState();
-  //  console.log(this.state);
-  console.log('Props:')
-  console.log(props)
+
   }
 
-  
-
-  // componentWillMount(){
-  //   /* Create reference to messages in Firebase Database */
-  //   let db = firebase.database().ref('/');    
-  //   db.on('value', snapshot => {
-  //     /* Update React state when message is added at Firebase Database */
-  //     let locData = snapshot.val();
-  //     this.setState(locData);
-  //   })
-  // }
-
-  // setState(props){
-    
-  //   db.on('value',function(snapshot){
-  //   this.state = snapshot.val();
-  //   // fb.setState(local_data)
-  //   });
-  // }
+  componentWillReceiveProps(newProps){
+     if(newProps != this.props){
+         this.setState(newProps)
+     }
+  }
 
   render() {
-    console.log('props from within render:')
-    console.log(this.props)
     return (
+
       <div className="app">
         <Header />
         <div className="app-body">
@@ -86,8 +67,10 @@ class Full extends Component {
                 <Route path="/icons/font-awesome" name="Font Awesome" component={FontAwesome}/>
                 <Route path="/icons/simple-line-icons" name="Simple Line Icons" component={SimpleLineIcons}/>
                 <Route path="/widgets" name="Widgets" component={Widgets}/>
+                
                 <Route path="/charts_original" name="Charts" component={Charts} />
-                <Route path="/charts" name="Charts" render={props => <Charts local_data={this.props.local_data} {...props} />} />
+                
+                <Route path="/charts" name="Charts" render={props => <Charts local_data={this.state.local_data} {...props} />} />
               
                 <Redirect from="/" to="/dashboard"/>
               </Switch>
@@ -103,9 +86,6 @@ class Full extends Component {
 
 
 const mapStateToProps = state => {
-  console.log('mapStateToProps')
-  console.log(state.val)
-  //var local_data = state.val;
   return {local_data : state.val}
 }
 
@@ -117,4 +97,3 @@ const FullConnected = connect(
 )(Full)
 
 export default FullConnected;
-//export default Full;

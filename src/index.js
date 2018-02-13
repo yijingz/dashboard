@@ -65,8 +65,8 @@ var db = firebase.database();
 db.ref('/').on('value', data => {
     if (data.val()) {
       store.dispatch({ type: 'SET_VAL', payload: data.val() });
-      console.log('dispatched & displaying getstate:')
-      console.log(store.getState());
+    //  console.log('dispatched & displaying getstate:')
+    //  console.log(store.getState());
     }
   });
 
